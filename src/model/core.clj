@@ -30,7 +30,8 @@
                learning-rate 0.025}}]
   (let [vocab (gc/create-vocab graph)
         vocab-size (count vocab)
-        vectors (vec (repeatedly vocab-size #(vec (repeatedly vector-size rand))))
+        vectors (vec (repeatedly vocab-size
+                                 #(vec (repeatedly vector-size rand))))
         nodes (keys graph)]
     (reduce
      (fn [vecs _]
@@ -39,8 +40,10 @@
           (let [walk (gc/random-walk graph start-node walk-length)]
             (reduce
              (fn [vecs [i word]]
-               (let [context-words (->> (range (max 0 (- i window-size))
-                                               (min (count walk) (+ i window-size 1)))
+               (let [context-words (->> (range (max 0
+                                                    (- i window-size))
+                                               (min (count walk)
+                                                    (+ i window-size 1)))
                                         (remove #(= % i))
                                         (map #(nth walk %)))]
                  (reduce
