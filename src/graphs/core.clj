@@ -18,9 +18,11 @@
   (get graph node))
 
 
-(defn index-graph-nodes
+(defn create-vocab
   "Indexes graph nodes. Creates a map of incremental vals being keys and the
-  corresponding values are the graph nodes"
+  corresponding values are the graph nodes. As each graph node is analogous to a
+  word in NLP terms, this function essentially creates vocab - collection of
+  words (indexed)"
   [graph]
   (zipmap (keys graph) (range)))
 
