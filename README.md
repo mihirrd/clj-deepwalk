@@ -1,44 +1,56 @@
-# clj-deepwalk
+# DeepWalk Clojure Library
 
-FIXME: description
+## Overview
+
+This library implements the DeepWalk algorithm for learning continuous feature
+representations for nodes in networks. DeepWalk uses short random walks to learn
+representations of vertices in a graph, which can be used for various downstream
+machine learning tasks such as node classification, link prediction, and
+community detection.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Add the following dependency to your `project.clj` file:
 
 ## Usage
 
-FIXME: explanation
+```
+(require '[deepwalk.core :as dw])
 
-    $ java -jar clj-deepwalk-0.1.0-standalone.jar [args]
+(def edges [[0 1] [1 2] [2 3] [3 0] [0 2] [1 3]])
+(def result (dw/deepwalk edges))
+```
 
-## Options
+### Using custom opts
+```
+(def result (dw/deepwalk edges
+                         :vector-size 128
+                         :walk-length 20
+                         :num-walks 100
+                         :window-size 10
+                         :learning-rate 0.025))
+```
 
-FIXME: listing of options this app accepts.
+## API Reference
 
-## Examples
+edges: A sequence of edges representing the graph. Each edge is a vector of two node identifiers.
+opts: Optional parameters (key-value pairs)
 
-...
+`:vector-size` (default: 64): Dimensionality of the feature representations
+`:walk-length` (default: 10): Length of each random walk
+`:num-walks` (default: 10): Number of random walks per node
+`:window-size` (default: 5): Maximum distance between the current and predicted node in the skip-gram model
+`:learning-rate` (default: 0.025): Learning rate for the skip-gram model
 
-### Bugs
+Returns a map containing:
 
-...
+`:graph:` The input graph represented as an adjacency list
+`:vectors:` The learned feature representations for each node
 
-### Any Other Sections
-### That You Think
-### Might be Useful
 
-## License
+## Limitations and Future Work
 
-Copyright © 2024 FIXME
+This implementation is a basic version of DeepWalk and has some limitations:
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+- It may not be efficient for very large graphs.
+- There currently isn't any parallelization for random walk generation or training.
