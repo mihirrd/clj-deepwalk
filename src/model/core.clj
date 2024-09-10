@@ -48,7 +48,7 @@
 
 
 (defn init-embedding
-  "Creates random embedding for size m x n where m = vector-size, n = # of nodes"
+  "Creates random embedding for size m x n where m = # of nodes, n = vector-size"
   [vector-size vocab-size]
   (->> rand
        ((partial repeatedly vector-size))
