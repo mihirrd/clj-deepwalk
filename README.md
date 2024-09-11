@@ -30,7 +30,7 @@ More on this here - [Deepwalking in clojure](https://medium.com/@deshpande.mihir
 ```
 
 ### Sample output
-```
+```clojure
 => (def edges [[:a :b] [:b :c] [:b :d]])
 
 => (dw/deepwalk edges :vector-size 5)
