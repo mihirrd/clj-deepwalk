@@ -8,7 +8,7 @@ representations of vertices in a graph, which can be used for various downstream
 machine learning tasks such as node classification, link prediction, and
 community detection.
 
-More on this here - [Deepwalking in clojure](https://medium.com/@deshpande.mihir7/deepwalking-in-clojure-0b2c4eacd4e0)
+More on this here - [Deepwalking in clojure](https://www.mihirdeshpande.com/posts/deepwalk_clojure)
 
 ## Usage
 
